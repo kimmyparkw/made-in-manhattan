@@ -1,0 +1,44 @@
+@font-face {
+font-family: 'Lemon/Milk Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Lemon/Milk Regular'), url('LemonMilk.woff') format('woff');
+}
+
+body {
+  animation: fadeIn ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Lemon/Milk Regular', sans-serif;
+}
+
+.hero-image {
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
+img {
+  width: 100%;
+}

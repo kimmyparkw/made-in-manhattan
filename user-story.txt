@@ -1,0 +1,43 @@
+Background: it's your first time in New York and you are starting as an unpaid
+intern at a fashion design studio. You must navigate through New York and the
+Fashion District to run errands. You want to work hard and make the best
+impression on your team lead and the designer with the ultimate goal of becoming
+the lead dresser at the fashion show.
+
+Story:
+You walk into the studio and are greeted by the head designer, Christina, herself! He
+introduces himself and asks you for your name. You introduce yourself and he
+wastes no time in getting you started with intern life. You are then introduced
+to the head intern(team lead), Michaela, who gives you a couple of tasks to do
+for the day. You are to pick up the dry cleaning and find some fabric swatches
+according to what Christina needs. Christina says she needs various swatches of nude, sequin fabric.
+
+1st decision:
+Either go to the fabric stores to see what there is or go to the dry cleaners first.
+
+if (fabric store first) {
+  pick which fabric store you want to go to first - Mood, B&H, or Spandex World
+  if (Mood) {
+    no fabrics like that
+    decision: either go to the studio or pick a new store
+      if (back to studio) - you're fired for making a bad impression
+  } else if (B&H) {
+    too expensive
+    decision: either go to the studio or pick a new store
+      if (back to studio) - you're fired for making a bad impression
+  } else if (Spandex World) {
+    You found some swatches!
+    decision: either go to the studio or pick a new store
+  }
+  decision: either go back to the studio or go to the dry cleaners.
+  if (back to studio) -- "What about the dry cleaning?!"
+}
+
+if (dry cleaning fist) {
+  You picked up the dry cleaning
+  decision: buy swatches or go to the studio first?
+  if (buy swatches) {
+   Your arms are about to fall off from holding such heavy garments for so long
+   and the city is too hot. You quit because this is not what you thought it would be.
+  }
+}
