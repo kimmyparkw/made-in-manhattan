@@ -2,7 +2,7 @@ Background: it's your first time in New York and you are starting as an unpaid
 intern at a fashion design studio. You must navigate through New York and the
 Fashion District to run errands. You want to work hard and make the best
 impression on your team lead and the designer with the ultimate goal of becoming
-the lead dresser at the fashion show.
+the lead dresser at the fashion show at the end of the week.
 
 Story:
 You walk into the studio and are greeted by the head designer, Christina, herself! He
@@ -12,7 +12,9 @@ to the head intern(team lead), Michaela, who gives you a couple of tasks to do
 for the day. You are to pick up the dry cleaning and find some fabric swatches
 according to what Christina needs. Christina says she needs various swatches of nude, sequin fabric.
 
-1st decision:
+--DAY 1--
+
+1st task set:
 Either go to the fabric stores to see what there is or go to the dry cleaners first.
 
 if (fabric store first) {
@@ -27,10 +29,11 @@ if (fabric store first) {
       if (back to studio) - you're fired for making a bad impression
   } else if (Spandex World) {
     You found some swatches!
-    decision: either go to the studio or pick a new store
   }
   decision: either go back to the studio or go to the dry cleaners.
-  if (back to studio) -- "What about the dry cleaning?!"
+  if (back to studio) -- "What about the dry cleaning?! You're fired!"
+  else if (dry cleaning then studio) -- "Wow you did that so fast! There is
+  nothing else for you to do today. See you tomorrow!"
 }
 
 if (dry cleaning fist) {
@@ -39,5 +42,37 @@ if (dry cleaning fist) {
   if (buy swatches) {
    Your arms are about to fall off from holding such heavy garments for so long
    and the city is too hot. You quit because this is not what you thought it would be.
+  } else if (back to studio) {
+  "what about the swatches?! You're fired!"
+  }
   }
 }
+
+--DAY 2--
+
+2nd task set:
+Need you to drop off a garment to a client.
+
+
+
+--DAY 3--
+Need you to buy the fabric that you found a swatch of or pick up a garment from a client
+
+
+
+--DAY 4--
+Need you to find a fabric that matches the color of these crystals and find a zipper
+
+
+
+--DAY 5--
+You can either sew or do crystal work
+
+
+
+--DAY 6--
+
+
+
+
+--DAY 7--
