@@ -4,7 +4,7 @@ const buttons = document.querySelectorAll('button')
 // console.log(buttons)
 // console.log(mainText);
 
-//--Characters--
+//--CHARACTERS--
 class Characters {
   constructor(name, position) {
     this.name = name;
@@ -17,6 +17,25 @@ class Characters {
 
 let designer = new Characters('Christina', 'designer')
 let headIntern = new Characters('Michaela', 'head intern')
-// mainGamePlay = () => {
-//
-// }
+
+//--CLICK EVENTS--
+  for (let button of buttons) {
+    button.addEventListener('click', makeSelection)
+  }
+
+//--FUNCTIONS--
+let playersDecisions = []
+
+const mainGamePlay = () => {
+
+}
+
+const displayDecisionText = (decisionIndex) => {
+
+}
+
+const makeSelection = (option) => {
+
+}
+
+mainGamePlay()
