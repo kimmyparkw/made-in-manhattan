@@ -22,7 +22,7 @@ let headIntern = new Characters('Michaela', 'head intern')
 const possibleChoices = [
   {
     id: 1,
-    text: `${designer.introduction} Welcome to the studio`,
+    text: `Welcome to the studio`,
     options: [
       {
         text: 'I am ready!',
@@ -67,18 +67,13 @@ const state = {}
 //
 // }
 
-//-- original way that I wrote the displayChoices function --
-// const displayChoices = (possibleChoicesIndex) => {
-//   const choiceText = possibleChoices.find(choicesText => possibleChoices.id === possibleChoicesIndex)
-//   mainText.innerText = choiceText.text
-//   //text is not showing up. Something wrong with the syntax?
-// }
-
-//-- testing out why my function is not working... --
+//-- this part works!!! --
 function displayChoices(possibleChoicesIndex) {
-  const choiceText = possibleChoices.find(choiceText => possibleChoices.id === possibleChoicesIndex)
-
+  const choiceText = possibleChoices.find(function(el) {
+    return el.id === possibleChoicesIndex
+  })
   console.log(choiceText);
+  mainText.innerText = choiceText.text
 }
 displayChoices(1)
 // const makeSelection = (option) => {
