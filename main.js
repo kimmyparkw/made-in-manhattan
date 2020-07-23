@@ -1,5 +1,5 @@
 const mainText = document.querySelector('p')
-const buttons = document.querySelectorAll('button')
+const buttonDiv = document.getElementById('options')
 
 // console.log(buttons)
 // console.log(mainText);
@@ -50,10 +50,6 @@ const possibleChoices = [
 
 ]
 
-//--CLICK EVENTS--
-  // for (let button of buttons) {
-  //   button.addEventListener('click', makeSelection)
-  // }
 
 //--FUNCTIONS--
 const state = {}
@@ -67,17 +63,33 @@ const state = {}
 //
 // }
 
+function showOption(option) {
+  return true
+}
+
+const makeSelection = (option) => {
+
+}
+
 //-- this part works!!! --
 function displayChoices(possibleChoicesIndex) {
+  //displaying the text from the option in the box
   const choiceText = possibleChoices.find(function(el) {
     return el.id === possibleChoicesIndex
   })
-  console.log(choiceText);
   mainText.innerText = choiceText.text
+
+  //displaying the options that are in the current decision in the box
+  // possibleChoices.options.forEach(option => {
+    if (showOption(option)) {
+      const button = document.createElement('button')
+      button.innerText = option.text
+      console.log(button);
+      //--- why is it showing up as undefined? --
+      // button.addEventListener('click', makeSelection)
+      buttonDiv.appendChild(button)
+    }
+  // })
 }
+
 displayChoices(1)
-// const makeSelection = (option) => {
-//
-// }
-//
-// mainGamePlay()
