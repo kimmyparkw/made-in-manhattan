@@ -50,7 +50,7 @@ const possibleChoices = [
 
 ]
 
-
+console.log(possibleChoices[0]);
 //--FUNCTIONS--
 const state = {}
 //created a game state as an empty object
@@ -68,7 +68,7 @@ function showOption(option) {
 }
 
 const makeSelection = (option) => {
-
+  console.log('hello');
 }
 
 //-- this part works!!! --
@@ -80,16 +80,25 @@ function displayChoices(possibleChoicesIndex) {
   mainText.innerText = choiceText.text
 
   //displaying the options that are in the current decision in the box
-  // possibleChoices.options.forEach(option => {
-    if (showOption(option)) {
-      const button = document.createElement('button')
-      button.innerText = option.text
-      console.log(button);
-      //--- why is it showing up as undefined? --
-      // button.addEventListener('click', makeSelection)
-      buttonDiv.appendChild(button)
-    }
-  // })
+  // for (let i = 0; i < possibleChoices.length; i++) {
+  //
+  //     const button = document.createElement('button')
+  //     button.innerText = possibleChoices[possibleChoicesIndex].options.text
+  //     console.log(button);
+  //     //--- showing other options from other option nodes??? --
+  //     button.addEventListener('click', makeSelection)
+  //     buttonDiv.appendChild(button)
+  //   }
+possibleChoices[possibleChoicesIndex].options.forEach(option => {
+  const button = document.createElement('button')
+  button.innerText = option.text
+  console.log(button);
+  //--- showing other options from other option nodes??? --
+  button.addEventListener('click', makeSelection)
+  buttonDiv.appendChild(button)
+})
+
+
 }
 
 displayChoices(1)
