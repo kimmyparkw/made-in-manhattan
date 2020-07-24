@@ -67,7 +67,7 @@ const narrationTexts = [
 ]
 
 const userOptions = [
-  'I am ready to work',
+  ['I am ready to work'],
   ['go to the fabric store', 'pick up the dry cleaning'],
 
 ]
@@ -85,18 +85,26 @@ const userOptions = [
 
 //--FUNCTIONS--
 function test() {
-  narrationTexts.forEach(function(el) {
-    narrationText.innerText = el
-  })
+  // narrationTexts.forEach(function(el) {
+  //   narrationText.innerText = el
+  // })
+  for (let i = 0; i < narrationTexts.length; i ++) {
+      narrationText.innerText = narrationTexts[i]
+  }
+
 
 //I have to loop through an array while looping through an array???
-  userOptions.forEach(function(el) {
-    el.forEach(function(option) {
+  for (let i = 0; i < userOptions.length; i ++){
+    for (let j = 0; j < userOptions[i].lenght; j ++) {
       const optionButtons = document.createElement('button')
       optionButtons.innerText = option
       console.log(optionButtons);
-    })
-  })
+       buttonDiv.appendChild(optionButtons)
+    }
+  }
+  // const optionButtons = document.createElement('button')
+  // optionButtons.innerText = userOptions[0]
+  // buttonDiv.appendChild(optionButtons)
 }
 
 test()
