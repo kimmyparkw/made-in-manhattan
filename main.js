@@ -21,36 +21,76 @@ let headIntern = new Characters('Michaela', 'head intern')
 //--ALL CHOICES---
 const possibleChoices = [
   {
-    id: 1,
+    id: 0,
     text: `Welcome to the studio`,
     options: [
       {
         text: 'I am ready!',
         setState: { getStarted: true },
-        nextText: 2
+        nextText: 1
+      }
+    ]
+  },
+  {
+    id: 1,
+    text: 'Here are some things I\'d like for you to get done today. Which would you like to do first?',
+    options: [
+      {
+        text: 'Pick up dry cleaning.',
+        requiredState: (currentState) => currentState.getStarted,
+        setState: {getStarted: true, dryCleaningFirst: true},
+        nextText:2
+      },
+      {
+        text: 'Find swatches for a nude, sequin fabric.',
+        requiredState: (currentState) => currentState.getStarted,
+        setState: {getStarted: true, swatchesFirst: true},
+        nextText:3
       }
     ]
   },
   {
     id: 2,
-    text: 'Here are some things I\'d like for you to get done today. Which would you like to do first?',
+    text: 'You\'ve picked up the dry cleaning. Would you like to head back to the office first, or go find some fabric swatches?',
     options: [
       {
-        text: 'Pick up dry cleaning.',
-        setState: {dryCleaningFirst: true},
-        nextText:3
+        text: 'Back to the studio',
+        requiredState: (currentState) => currentState.dryCleaningFirst,
+        setState: {getStarted:true, dryCleaningFirst: true, backToStudio: true},
+        nextText: 4
       },
       {
-        text: 'Find swatches for a nude, sequin fabric.',
-        setState: {swatchesFirst: true},
-        nextText:4
+        text: 'Find fabric swatches',
+        setState: {getStarted:true, dryCleaningFirst: true, swatchesFirst: true},
+        nextText: 3
+      }
+    ]
+  },
+  {
+    id: 3,
+    text: 'Michaela, the head intern, gave you a list of fabric stores that might have the fabric you are looking for. Which would you like to visit first?',
+    options: [
+      {
+        text: 'Mood Fabrics',
+        setState: {getStarted:true, dryCleaningFirst: false, swatchesFirst: true, moodFabrics: true},
+        nextText: 4
+      },
+      {
+        text: 'B&H Fabrics',
+        setState: {getStarted:true, swatchesFirst: true, bHFabrics: true},
+        nextText: 4
+      },
+      {
+        text: 'Spandex World',
+        setState: {getStarted:true, swatchesFirst: true, spandexWorld: true},
+        nextText: 5
       }
     ]
   }
 
 ]
 
-console.log(possibleChoices[0]);
+// console.log(possibleChoices[0]);
 //--FUNCTIONS--
 const state = {}
 //created a game state as an empty object
@@ -64,11 +104,17 @@ const state = {}
 // }
 
 function showOption(option) {
-  return true
+  return true;
+  // return option.state == null || option.requiredState(state)
 }
+//--THESE TWO PARTS ARE NOT WORKING--
+function makeSelection(evt){
 
-const makeSelection = (option) => {
-  console.log('hello');
+  // const nextText = option.nextText
+  // state.decisions =
+  // // Object.assign(state, option.setState)
+  // displayChoices(nextText)
+  console.log(evt);
 }
 
 //-- this part works!!! --
@@ -78,27 +124,16 @@ function displayChoices(possibleChoicesIndex) {
     return el.id === possibleChoicesIndex
   })
   mainText.innerText = choiceText.text
-
-  //displaying the options that are in the current decision in the box
-  // for (let i = 0; i < possibleChoices.length; i++) {
-  //
-  //     const button = document.createElement('button')
-  //     button.innerText = possibleChoices[possibleChoicesIndex].options.text
-  //     console.log(button);
-  //     //--- showing other options from other option nodes??? --
-  //     button.addEventListener('click', makeSelection)
-  //     buttonDiv.appendChild(button)
-  //   }
-possibleChoices[possibleChoicesIndex].options.forEach(option => {
-  const button = document.createElement('button')
-  button.innerText = option.text
-  console.log(button);
-  //--- showing other options from other option nodes??? --
-  button.addEventListener('click', makeSelection)
-  buttonDiv.appendChild(button)
-})
-
-
+  //--displaying the buttons--
+  possibleChoices[possibleChoicesIndex].options.forEach(option => {
+    if (showOption(option)) {
+      const button = document.createElement('button')
+      button.innerText = option.text
+      console.log(button);
+      button.addEventListener('click', makeSelection)
+      buttonDiv.appendChild(button)
+    }
+  })
 }
 
 displayChoices(1)
