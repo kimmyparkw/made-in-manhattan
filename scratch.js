@@ -112,14 +112,21 @@ const userOptions = [
 let startGame = true
 let userChoices = 0
 
-if (startGame === true) {
-  narrationText.innerText = narrationTexts[0]
-  let optionButton = document.createElement('button')
-  optionButton.innerText = userOptions[0][0]
-  buttonDiv.appendChild(optionButton)
-  optionButton.addEventListener('click', firstDecision)
-  userChoices++
+function gameStart() {
+  if (startGame === true) {
+    let previousButtons = document.querySelector('button')
+    if (previousButtons) {
+      previousButtons.remove()
+    }
+    narrationText.innerText = narrationTexts[0]
+    let optionButton = document.createElement('button')
+    optionButton.innerText = userOptions[0][0]
+    buttonDiv.appendChild(optionButton)
+    optionButton.addEventListener('click', firstDecision)
+    userChoices++
+  }
 }
+gameStart()
 //picked let's get started
 function firstDecision() {
   if (userChoices === 1) {
@@ -151,8 +158,8 @@ function secondDecision() {
     optionButton2.innerText = userOptions[2][1]
     buttonDiv.appendChild(optionButton)
     buttonDiv.appendChild(optionButton2)
-    optionButton.addEventListener('click', fourthDecision)
-    optionButton2.addEventListener('click', fourthDecision)
+    optionButton.addEventListener('click', deadEnd1)
+    optionButton2.addEventListener('click', deadEnd2)
     userChoices++
   }
 }
@@ -178,12 +185,29 @@ function thirdDecision() {
     userChoices++
   }
 }
-
-function fourthDecision() {
+//head back to the studio after picking up dry cleaning
+function deadEnd1() {
   if (userChoices === 3) {
     let previousButtons = document.querySelectorAll('button')
     previousButtons[0].remove()
     previousButtons[1].remove()
-    narrationText.innerText = `You did not complete your tasks for the day successfully. Game over!`
+    narrationText.innerText = narrationTexts[4]
+    let restart = document.createElement('button')
+    restart.innerText = 'RESTART'
+    buttonDiv.appendChild(restart)
+    restart.addEventListener('click', gameStart)
+  }
+}
+//go fabric shopping after picking up the dry cleaning
+function deadEnd2() {
+  if (userChoices === 3) {
+    let previousButtons = document.querySelectorAll('button')
+    previousButtons[0].remove()
+    previousButtons[1].remove()
+    narrationText.innerText = narrationTexts[3]
+    let restart = document.createElement('button')
+    restart.innerText = 'RESTART'
+    buttonDiv.appendChild(restart)
+    restart.addEventListener('click', gameStart)
   }
 }
