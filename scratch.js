@@ -71,7 +71,8 @@ const userOptions = [
   ['I am ready to work'],
   ['go to the fabric store', 'pick up the dry cleaning'],
   ['Go back to the studio', 'Go to the fabric store'],
-  ['Mood Fabrics', 'B&H Fabircs', 'Spandex World']
+  ['Mood Fabrics', 'B&H Fabircs', 'Spandex World'],
+  ['Go back to the studio', 'Go to B&H Fabircs', 'Go to Spandex World']
 ]
 
 //
@@ -129,7 +130,7 @@ function gameStart() {
 gameStart()
 //picked let's get started
 function firstDecision() {
-  if (userChoices === 1) {
+  if (userChoices = 1) {
     let previousButtons = document.querySelector('button')
     previousButtons.remove()
     narrationText.innerText = narrationTexts[1]
@@ -147,7 +148,7 @@ function firstDecision() {
 
 //picking up dry cleaning
 function secondDecision() {
-  if (userChoices === 2) {
+  if (userChoices = 2) {
     let previousButtons = document.querySelectorAll('button')
     previousButtons[0].remove()
     previousButtons[1].remove()
@@ -165,7 +166,7 @@ function secondDecision() {
 }
 //going to the fabric store
 function thirdDecision() {
-  if (userChoices === 2) {
+  if (userChoices = 2) {
     let previousButtons = document.querySelectorAll('button')
     previousButtons[0].remove()
     previousButtons[1].remove()
@@ -179,16 +180,17 @@ function thirdDecision() {
     buttonDiv.appendChild(optionButton)
     buttonDiv.appendChild(optionButton2)
     buttonDiv.appendChild(optionButton3)
-    optionButton.addEventListener('click', fifthDecision)
-    optionButton2.addEventListener('click', fifthDecision)
-    optionButton3.addEventListener('click', fifthDecision)
+    optionButton.addEventListener('click', fourthDecisionMood)
+    optionButton2.addEventListener('click', fourthDecisionB)
+    optionButton3.addEventListener('click', fourthDecisionS)
     userChoices++
   }
 }
 //head back to the studio after picking up dry cleaning
 function deadEnd1() {
-  if (userChoices === 3) {
+  if (userChoices = 3) {
     let previousButtons = document.querySelectorAll('button')
+    //--unable to remove the adequate number of buttons after fourthDecisionMood--
     previousButtons[0].remove()
     previousButtons[1].remove()
     narrationText.innerText = narrationTexts[4]
@@ -196,11 +198,12 @@ function deadEnd1() {
     restart.innerText = 'RESTART'
     buttonDiv.appendChild(restart)
     restart.addEventListener('click', gameStart)
+    userChoices = 0
   }
 }
 //go fabric shopping after picking up the dry cleaning
 function deadEnd2() {
-  if (userChoices === 3) {
+  if (userChoices = 3) {
     let previousButtons = document.querySelectorAll('button')
     previousButtons[0].remove()
     previousButtons[1].remove()
@@ -209,5 +212,30 @@ function deadEnd2() {
     restart.innerText = 'RESTART'
     buttonDiv.appendChild(restart)
     restart.addEventListener('click', gameStart)
+    userChoices = 0
+  }
+}
+
+//fabric shopping first. Picked Mood.
+function fourthDecisionMood() {
+  if (userChoices = 4) {
+    let previousButtons = document.querySelectorAll('button')
+    previousButtons[0].remove()
+    previousButtons[1].remove()
+    previousButtons[2].remove()
+    narrationText.innerText = narrationTexts[6]
+    let optionButton = document.createElement('button')
+    let optionButton2 = document.createElement('button')
+    let optionButton3 = document.createElement('button')
+    optionButton.innerText = userOptions[4][0]
+    optionButton2.innerText = userOptions[4][1]
+    optionButton3.innerText = userOptions[4][2]
+    buttonDiv.appendChild(optionButton)
+    buttonDiv.appendChild(optionButton2)
+    buttonDiv.appendChild(optionButton3)
+    optionButton.addEventListener('click', deadEnd1)
+    optionButton2.addEventListener('click', fourthDecisionB)
+    optionButton3.addEventListener('click', fourthDecisionS)
+    userChoices++
   }
 }
