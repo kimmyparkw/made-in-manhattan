@@ -59,7 +59,7 @@ h1 {
 
 p {
   margin: 20px auto;
-  font-size: 18px;
+  font-size: 24px;
 }
 
 .button-grid {
@@ -71,6 +71,7 @@ button {
   margin: 5px 5px;
   border-radius: 5px;
   font-family: 'Cormorant', serif;
+  font-size: 18px;
 }
 
 button:hover {
