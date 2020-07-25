@@ -131,7 +131,7 @@ function gameStart() {
   }
 }
 gameStart()
-//picked let's get started
+//picked i am ready
 function firstDecision() {
   if (userChoices === 1) {
     let previousButtons = document.querySelector('button')
@@ -344,3 +344,8 @@ function endOfDay() {
   userChoices = 0
 }
 //try switch statements
+
+// function buttonRemoval(button) {
+//   let previousButtons = document.querySelectorAll('button')
+//   previousButtons[button].remove()
+// }
