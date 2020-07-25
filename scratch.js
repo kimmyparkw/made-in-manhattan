@@ -46,11 +46,6 @@ const moodFabrics = new FabricStores('Mood Fabrics', 'mesh', 'tweed', 'floral ja
 
 //--USER STORY--
 
-//push the user's choices into this array to keep track of the game <-- need a function for this - when you select the option?
-
-//how to hold the info for each day/decision?
-//should I have separate arrays for the narration text and options?
-
 const narrationTexts = [
   `Welcome to the studio! ${christina.introduction()} Are you ready to get started?`,
   'Here are a couple things I like for you to get done today. Which would you like to start with?',
@@ -78,40 +73,49 @@ const userOptions = [
   ['Go back to the studio']
 ]
 
-//
-// //--FUNCTIONS--
-// // function test() {
-//   // narrationTexts.forEach(function(el) {
-//   //   narrationText.innerText = el
-//   // })
-//   function narrate() {
-//     for (let i = 0; i < narrationTexts.length; i ++) {
-//         return narrationText.innerText = narrationTexts[i]
-//     }
-//   }
-//
-//
-// function showOptions() {
-//   for (let i = 0; i < userOptions.length; i ++){
-//     let optionText = userOptions[i]
-//     for (let j = 0; j < optionText.length; j ++) {
-//       const optionButtons = document.createElement('button')
-//       optionButtons.innerText = optionText[j]
-//       buttonDiv.appendChild(optionButtons)
-//     }
-//   }
-// }
-//
-// function makeDecision() {
-//
-// }
-//   // const optionButtons = document.createElement('button')
-//   // optionButtons.innerText = userOptions[0]
-//   // buttonDiv.appendChild(optionButtons)
-// // }
-//
-// narrate()
-// showOptions()
+//--FUNCTIONS--
+
+function optionButtons(x, y, z, a, fun1, fun2, fun3) {
+  let optionButton = document.createElement('button')
+
+  optionButton.innerText = userOptions[x][y]
+  buttonDiv.appendChild(optionButton)
+  optionButton.addEventListener('click', fun1)
+  if (z != null) {
+    let optionButton2 = document.createElement('button')
+    optionButton2.innerText = userOptions[x][z]
+    buttonDiv.appendChild(optionButton2)
+    optionButton2.addEventListener('click', fun2)
+  }
+  if (a != null) {
+    let optionButton3 = document.createElement('button')
+    optionButton3.innerText = userOptions[x][a]
+    buttonDiv.appendChild(optionButton3)
+    optionButton3.addEventListener('click', fun3)
+  }
+}
+
+function buttonRemoval(previousButtons, button1, button2, button3) {
+  if (button2 === null && button3 === null) {
+    previousButtons.remove()
+  } else {
+    previousButtons[button1].remove()
+    if (button2 != null) {
+      previousButtons[button2].remove()
+    }
+    if (button3 != null) {
+      previousButtons[button3].remove()
+    }
+  }
+}
+
+function restart() {
+  let restart = document.createElement('button')
+  restart.innerText = 'RESTART'
+  buttonDiv.appendChild(restart)
+  restart.addEventListener('click', gameStart)
+  userChoices = 0
+}
 
 let startGame = true
 let userChoices = 0
@@ -123,98 +127,63 @@ function gameStart() {
       previousButtons.remove()
     }
     narrationText.innerText = narrationTexts[0]
-    let optionButton = document.createElement('button')
-    optionButton.innerText = userOptions[0][0]
-    buttonDiv.appendChild(optionButton)
-    optionButton.addEventListener('click', firstDecision)
+    optionButtons(0, 0, null, null, firstDecision, null, null)
     userChoices++
   }
 }
 gameStart()
+
 //picked i am ready
 function firstDecision() {
   if (userChoices === 1) {
     let previousButtons = document.querySelector('button')
-    previousButtons.remove()
+    buttonRemoval(previousButtons, 0, null, null)
     narrationText.innerText = narrationTexts[1]
-    let optionButton = document.createElement('button')
-    let optionButton2 = document.createElement('button')
-    optionButton.innerText = userOptions[1][0]
-    optionButton2.innerText = userOptions[1][1]
-    buttonDiv.appendChild(optionButton)
-    buttonDiv.appendChild(optionButton2)
-    optionButton.addEventListener('click', thirdDecision)
-    optionButton2.addEventListener('click', secondDecision)
+    optionButtons(1, 0, 1, null, thirdDecision, secondDecision, null)
     userChoices++
     }
   }
+
 
 //picking up dry cleaning
 function secondDecision() {
   if (userChoices === 2) {
     let previousButtons = document.querySelectorAll('button')
-    previousButtons[0].remove()
-    previousButtons[1].remove()
+    buttonRemoval(previousButtons, 0, 1, null)
     narrationText.innerText = narrationTexts[2]
-    let optionButton = document.createElement('button')
-    let optionButton2 = document.createElement('button')
-    optionButton.innerText = userOptions[2][0]
-    optionButton2.innerText = userOptions[2][1]
-    buttonDiv.appendChild(optionButton)
-    buttonDiv.appendChild(optionButton2)
-    optionButton.addEventListener('click', deadEnd1)
-    optionButton2.addEventListener('click', deadEnd2)
+    optionButtons(2, 0, 1, null, deadEnd1, deadEnd2)
     userChoices++
   }
 }
+
 //going to the fabric store
 function thirdDecision() {
   if (userChoices === 2) {
     let previousButtons = document.querySelectorAll('button')
-    previousButtons[0].remove()
-    previousButtons[1].remove()
+    buttonRemoval(previousButtons, 0, 1, null)
     narrationText.innerText = narrationTexts[5]
-    let optionButton = document.createElement('button')
-    let optionButton2 = document.createElement('button')
-    let optionButton3 = document.createElement('button')
-    optionButton.innerText = userOptions[3][0]
-    optionButton2.innerText = userOptions[3][1]
-    optionButton3.innerText = userOptions[3][2]
-    buttonDiv.appendChild(optionButton)
-    buttonDiv.appendChild(optionButton2)
-    buttonDiv.appendChild(optionButton3)
-    optionButton.addEventListener('click', fourthDecisionMood)
-    optionButton2.addEventListener('click', fourthDecisionB)
-    optionButton3.addEventListener('click', fourthDecisionS)
+    optionButtons(3, 0, 1, 2, fourthDecisionMood, fourthDecisionB, fourthDecisionS)
     userChoices++
   }
 }
+
 //head back to the studio after picking up dry cleaning
 function deadEnd1() {
   if (userChoices === 3) {
     let previousButtons = document.querySelectorAll('button')
-    previousButtons[0].remove()
-    previousButtons[1].remove()
+    buttonRemoval(previousButtons, 0, 1, null)
     narrationText.innerText = narrationTexts[4]
-    let restart = document.createElement('button')
-    restart.innerText = 'RESTART'
-    buttonDiv.appendChild(restart)
-    restart.addEventListener('click', gameStart)
-    userChoices = 0
+    restart()
   }
 }
+
 //go fabric shopping after picking up the dry cleaning
 function deadEnd2() {
   if (userChoices === 3) {
     let previousButtons = document.querySelectorAll('button')
-    previousButtons[0].remove()
-    previousButtons[1].remove()
+    buttonRemoval(previousButtons, 0, 1, null)
     narrationText.innerText = narrationTexts[3]
-    let restart = document.createElement('button')
-    restart.innerText = 'RESTART'
-    buttonDiv.appendChild(restart)
-    restart.addEventListener('click', gameStart)
-    userChoices = 0
+    restart()
   }
 }
 
@@ -222,22 +191,9 @@ function deadEnd2() {
 function fourthDecisionMood() {
   if (userChoices >= 3) {
     let previousButtons = document.querySelectorAll('button')
-    previousButtons[0].remove()
-    previousButtons[1].remove()
-    previousButtons[2].remove()
+    buttonRemoval(previousButtons, 0, 1, 2)
     narrationText.innerText = narrationTexts[6]
-    let optionButton = document.createElement('button')
-    let optionButton2 = document.createElement('button')
-    let optionButton3 = document.createElement('button')
-    optionButton.innerText = userOptions[4][0]
-    optionButton2.innerText = userOptions[4][1]
-    optionButton3.innerText = userOptions[4][2]
-    buttonDiv.appendChild(optionButton)
-    buttonDiv.appendChild(optionButton2)
-    buttonDiv.appendChild(optionButton3)
-    optionButton.addEventListener('click', deadEnd3)
-    optionButton2.addEventListener('click', fourthDecisionB)
-    optionButton3.addEventListener('click', fourthDecisionS)
+    optionButtons(4, 0, 1, 2, deadEnd3, fourthDecisionB, fourthDecisionS)
     userChoices++
   }
 }
@@ -246,15 +202,9 @@ function fourthDecisionMood() {
 function deadEnd3() {
   if (userChoices >= 4) {
     let previousButtons = document.querySelectorAll('button')
-    previousButtons[0].remove()
-    previousButtons[1].remove()
-    previousButtons[2].remove()
+    buttonRemoval(previousButtons, 0, 1, 2)
     narrationText.innerText = narrationTexts[4]
-    let restart = document.createElement('button')
-    restart.innerText = 'RESTART'
-    buttonDiv.appendChild(restart)
-    restart.addEventListener('click', gameStart)
-    userChoices = 0
+    restart()
   }
 }
 
@@ -262,22 +212,9 @@ function deadEnd3() {
 function fourthDecisionB() {
   if (userChoices >= 3) {
     let previousButtons = document.querySelectorAll('button')
-    previousButtons[0].remove()
-    previousButtons[1].remove()
-    previousButtons[2].remove()
+    buttonRemoval(previousButtons, 0, 1, 2)
     narrationText.innerText = narrationTexts[7]
-    let optionButton = document.createElement('button')
-    let optionButton2 = document.createElement('button')
-    let optionButton3 = document.createElement('button')
-    optionButton.innerText = userOptions[5][0]
-    optionButton2.innerText = userOptions[5][1]
-    optionButton3.innerText = userOptions[5][2]
-    buttonDiv.appendChild(optionButton)
-    buttonDiv.appendChild(optionButton2)
-    buttonDiv.appendChild(optionButton3)
-    optionButton.addEventListener('click', deadEnd3)
-    optionButton2.addEventListener('click', fourthDecisionMood)
-    optionButton3.addEventListener('click', fourthDecisionS)
+    optionButtons(5, 0, 1, 2, deadEnd3, fourthDecisionMood, fourthDecisionS)
     userChoices++
   }
 }
@@ -286,18 +223,9 @@ function fourthDecisionB() {
 function fourthDecisionS() {
   if (userChoices >= 3) {
     let previousButtons = document.querySelectorAll('button')
-    previousButtons[0].remove()
-    previousButtons[1].remove()
-    previousButtons[2].remove()
+    buttonRemoval(previousButtons, 0, 1, 2)
     narrationText.innerText = narrationTexts[8]
-    let optionButton = document.createElement('button')
-    let optionButton2 = document.createElement('button')
-    optionButton.innerText = userOptions[6][0]
-    optionButton2.innerText = userOptions[6][1]
-    buttonDiv.appendChild(optionButton)
-    buttonDiv.appendChild(optionButton2)
-    optionButton.addEventListener('click', deadEnd4)
-    optionButton2.addEventListener('click', dryCleaningSecond)
+    optionButtons(6, 0, 1, null, deadEnd4, dryCleaningSecond, null)
     userChoices++
   }
 }
@@ -306,14 +234,9 @@ function fourthDecisionS() {
 function deadEnd4() {
   if (userChoices >= 4) {
     let previousButtons = document.querySelectorAll('button')
-    previousButtons[0].remove()
-    previousButtons[1].remove()
+    buttonRemoval(previousButtons, 0, 1, null)
     narrationText.innerText = narrationTexts[9]
-    let restart = document.createElement('button')
-    restart.innerText = 'RESTART'
-    buttonDiv.appendChild(restart)
-    restart.addEventListener('click', gameStart)
-    userChoices = 0
+    restart()
   }
 }
 
@@ -321,31 +244,17 @@ function deadEnd4() {
 function dryCleaningSecond() {
   if (userChoices >= 4) {
     let previousButtons = document.querySelectorAll('button')
-    previousButtons[0].remove()
-    previousButtons[1].remove()
+    buttonRemoval(previousButtons, 0, 1, null)
     narrationText.innerText = narrationTexts[10]
-    let optionButton = document.createElement('button')
-    optionButton.innerText = userOptions[7][0]
-    buttonDiv.appendChild(optionButton)
-    optionButton.addEventListener('click', endOfDay)
+    optionButtons(7, 0, null, null, endOfDay, null, null)
     userChoices++
   }
 }
 
 //end of day 1
 function endOfDay() {
-  let previousButtons = document.querySelectorAll('button')
-  previousButtons[0].remove()
+  let previousButtons = document.querySelector('button')
+  buttonRemoval(previousButtons, 0, null, null)
   narrationText.innerText = 'Congratulations! Christina was so impressed by your hard work that she has made you the head dresser for the fashion show!'
-  let restart = document.createElement('button')
-  restart.innerText = 'RESTART'
-  buttonDiv.appendChild(restart)
-  restart.addEventListener('click', gameStart)
-  userChoices = 0
+  restart()
 }
-//try switch statements
-
-// function buttonRemoval(button) {
-//   let previousButtons = document.querySelectorAll('button')
-//   previousButtons[button].remove()
-// }
