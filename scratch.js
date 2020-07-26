@@ -47,16 +47,16 @@ const moodFabrics = new FabricStores('Mood Fabrics', 'mesh', 'tweed', 'floral ja
 //--USER STORY--
 
 const narrationTexts = [
-  `Welcome to the studio! ${christina.introduction()} Are you ready to get started?`,
-  'Here are a couple things I like for you to get done today. Which would you like to start with?',
+  `"Welcome to the studio! ${christina.introduction()} Are you ready to get started?"`,
+  '"Great! Here are a couple things I like for you to get done today. Which would you like to start with?"',
   'You have picked up the dry cleaning. What would you like to do next?',
-  'You become tired from carrying so much around New York. You quit because you did not realize there would be this much physical labor involved.',
-  'You head back to the studio but the designer is disappointed that you did not bring back any swatches. You are fired!',
-  `${michaela.introduction()} Here is a list of fabric stores that might have the nude sequin fabric Christina is looking for. Which one would you like to go to first?`,
-  `You head to Mood Fabrics. Here are the fabrics that have in store: ${moodFabrics.inventory}. Looks like they don't have the fabric you are looking for. What would you like to do next?`,
-  `You head to B&H Fabrics. Here are the fabrics they have in store: ${bHFabrics.inventory}. Looks like they don't have the fabric you are looking for. What would you like to do next?`,
-  `You head to Spandex World. Here are the fabrics they have in store: ${spandexWorld.inventory}. Looks like they have what you want. Now that you have your swatch, would you like to head back to the studio or go pick up the dry cleaning?`,
-  `You return to the studio, but the designer is disappointed that you did not pick up the dry cleaning. You are fired!`,
+  'You realize that carrying 15 pounds of clothes and wandering around NY when it is over 90 degrees is NOT fun. You pass out from heat exhaustion and the traumatic experience of passing out in the middle of a busy city makes your think this might not be the path for you.',
+  `"What about the swatches?! I don't have time for interns that can't complete all their tasks. You're fired!" - Christina`,
+  `"${michaela.introduction()} Here is a list of fabric stores that might have the nude sequin fabric Christina is looking for. Which one would you like to go to first?"`,
+  `You head to Mood Fabrics. Here are the fabrics that have in store: ${moodFabrics.inventory[0]}, ${moodFabrics.inventory[1]}, ${moodFabrics.inventory[2]}, and ${moodFabrics.inventory[3]}. Looks like they don't have the fabric you are looking for. What would you like to do next?`,
+  `You head to B&H Fabrics. Here are the fabrics they have in store: ${bHFabrics.inventory[0]}, ${bHFabrics.inventory[1]}, ${bHFabrics.inventory[2]}, and ${bHFabrics.inventory[3]}. Looks like they don't have the fabric you are looking for. What would you like to do next?`,
+  `You head to Spandex World. Here are the fabrics they have in store: ${spandexWorld.inventory[0]}, ${spandexWorld.inventory[1]}, ${spandexWorld.inventory[2]}, and ${spandexWorld.inventory[3]}. Looks like they have what you want. Now that you have your swatch, would you like to head back to the studio or go pick up the dry cleaning?`,
+  `"What about the dry cleaning?! I don't have time for interns that can't complete all their tasks. You're fired!" - Christina`,
   `You have finished your tasks for today. Time to head back to the studio.`,
   `${christina.impressed()} - Christina says`,
 
@@ -255,6 +255,6 @@ function dryCleaningSecond() {
 function endOfDay() {
   let previousButtons = document.querySelector('button')
   buttonRemoval(previousButtons, 0, null, null)
-  narrationText.innerText = 'Congratulations! Christina was so impressed by your hard work that she has made you the head dresser for the fashion show!'
+  narrationText.innerText = 'Congratulations, you win! Christina was so impressed by your hard work that she has made you the head dresser for the fashion show!'
   restart()
 }
