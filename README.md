@@ -1,10 +1,10 @@
-I tried to keep my code as dry as possible, but since my data was arranged within 2 separate arrays, this is about as dry as I  could make it. I used classes to create the characters and fabric stores and was able to access the methods within the narration texts. I created a lot of buttons and used click events on each to deliver the user to the next point in the story.
+<h1>Technology Used:</h1>
+I used classes to create the characters and fabric stores and was able to access the methods within the narration texts. I created a lot of buttons and used click events on each to deliver the user to the next point in the story. I used nested arrays to hold my narration text as well as my option button texts.
 
-As the user, just click through the decisions that you would like to make.
+<h1> Approach taken:</h1>
+I created divs for my text as well as the option buttons. I knew I needed to access text information for each and append them to the divs. Then I had to be able to remove the buttons from the previous page before appending the buttons for the next decision. 
 
-My biggest problem that I would like to address at a later time would be to dry up my code and to try using a nested array with objects that have the narration texts and options in the same object. that way I can access all the information in one method.
-
-USER STORY:
+<h1>User story:</h1>
 
 Background: it's your first time in New York and you are starting as an unpaid
 intern at a fashion design studio. You must navigate through New York and the
@@ -55,6 +55,14 @@ if (dry cleaning fist) {
   }
   }
 }
+<h1>Wireframes:</h1>
+https://github.com/kimmyparkw/made-in-manhattan/issues/4
+
+<h1>How to use:</h1>
+As the user, just click through the decisions that you would like to make.
+
+<h1>Unsolved problems:</h1>
+My biggest problem that I would like to address at a later time would be to dry up my code and to try using a nested array with objects that have the narration texts and options in the same object. that way I can access all the information in one method.
 
 ## Welcome to GitHub Pages
 
