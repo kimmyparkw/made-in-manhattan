@@ -79,7 +79,7 @@ const userOptions = [
   ['Go back to the studio'], //use this for narrationTexts[19]
   ['Drop off garments', 'Buy the fabric'],
   ['Essex station', 'East Broadway station'],
-  ['Start day 2']
+  ['Start next day']
 ]
 
 //--FUNCTIONS--
@@ -305,5 +305,36 @@ function eastBroadway() {
 }
 
 function buyYardageSecond() {
-  console.log('hello');
+  let previousButtons = document.querySelectorAll('button')
+  buttonRemoval(previousButtons, 0, 1, null)
+  narrationText.innerText = narrationTexts[16]
+  optionButtons(3, 0, 1, 2, moodForYardage, bhForYardage, swForYardage)
+}
+
+function moodForYardage() {
+  let previousButtons = document.querySelectorAll('button')
+  buttonRemoval(previousButtons, 0, 1, 2)
+  narrationText.innerText = narrationTexts[17]
+  optionButtons(3, 0, 1, 2, moodForYardage, bhForYardage, swForYardage)
+}
+
+function bhForYardage() {
+  let previousButtons = document.querySelectorAll('button')
+  buttonRemoval(previousButtons, 0, 1, 2)
+  narrationText.innerText = narrationTexts[18]
+  optionButtons(3, 0, 1, 2, moodForYardage, bhForYardage, swForYardage)
+}
+
+function swForYardage() {
+  let previousButtons = document.querySelectorAll('button')
+  buttonRemoval(previousButtons, 0, 1, 2)
+  narrationText.innerText = narrationTexts[19]
+  optionButtons(7, 0, null, null, winningPage, null, null)
+}
+
+function winningPage() {
+  let previousButtons = document.querySelector('button')
+  buttonRemoval(previousButtons, 0, null, null)
+  narrationText.innerText = 'Congratulations! Christina is so impressed with your hard work that she has appointed you as the head dresser for the fashion show! Would you like to play again?'
+  restart()
 }
