@@ -31,9 +31,6 @@ class FabricStores {
   getSwatch() {
     console.log(`You got a swatch from ${this.name}`);
   }
-  buyYardage() {
-    console.log(`You bought fabric from ${this.name}`);
-  }
 }
 
 const spandexWorld = new FabricStores('Spandex World', 'stretch nylon', 'spandex', 'nude sequin', 'yellow lace')
@@ -47,11 +44,12 @@ const moodFabrics = new FabricStores('Mood Fabrics', 'mesh', 'tweed', 'floral ja
 //--USER STORY--
 
 const narrationTexts = [
+  //day 1
   `"Welcome to the studio! ${christina.introduction()} Are you ready to get started?"`,
   '"Great! Here are a couple things I like for you to get done today. Which would you like to start with?"',
   'You have picked up the dry cleaning. What would you like to do next?',
-  'You realize that carrying 15 pounds of clothes and wandering around NY when it is over 90 degrees is NOT fun. You pass out from heat exhaustion and the traumatic experience of passing out in the middle of a busy city makes your think this might not be the path for you.',
-  `"What about the swatches?! I don't have time for interns that can't complete all their tasks. You're fired!" - Christina`,
+  'You realize that carrying 15 pounds of clothes and wandering around NY when it is over 90 degrees is NOT fun. You pass out from heat exhaustion and the traumatic experience of passing out in the middle of a busy city makes you think this might not be the path for you.',
+  `"What about the fabric?! I don't have time for interns that can't complete all their tasks. You're fired!" - Christina`,
   `"${michaela.introduction()} Here is a list of fabric stores that might have the nude sequin fabric Christina is looking for. Which one would you like to go to first?"`,
   `You head to Mood Fabrics. Here are the fabrics that have in store: ${moodFabrics.inventory[0]}, ${moodFabrics.inventory[1]}, ${moodFabrics.inventory[2]}, and ${moodFabrics.inventory[3]}. Looks like they don't have the fabric you are looking for. What would you like to do next?`,
   `You head to B&H Fabrics. Here are the fabrics they have in store: ${bHFabrics.inventory[0]}, ${bHFabrics.inventory[1]}, ${bHFabrics.inventory[2]}, and ${bHFabrics.inventory[3]}. Looks like they don't have the fabric you are looking for. What would you like to do next?`,
@@ -59,18 +57,29 @@ const narrationTexts = [
   `"What about the dry cleaning?! I don't have time for interns that can't complete all their tasks. You're fired!" - Christina`,
   `You have finished your tasks for today. Time to head back to the studio.`,
   `${christina.impressed()} - Christina says`,
-
+  //day 2 - starts with i = 12
+  `"Welcome back to the studio! For today, I'd like you to drop off a garment to a client and buy the fabric that you had found swatches of yesterday." -Christina. Which would you like to do first?`,
+  `You're on your way to the client and you can choose between the Essex subway station or the East Broadway station. Which one do you take?`,
+  `Turns out the Essex station has way too many tunnels. You get lost in the station and you never make it to the client. You're fired!`,
+  `The East Broadway station is really easy to navigate since there is only one platform. You make it to the client in a timely manner. Would you like to head back to the studio or buy the fabric?`,
+  `Do you remember which fabric store you bought the swatch from?`,
+  `You look around at the inventory: ${moodFabrics.inventory[0]}, ${moodFabrics.inventory[1]}, ${moodFabrics.inventory[2]}, and ${moodFabrics.inventory[3]}. Turns out it wasn't this store.`,
+  `You look around at the inventory: ${bHFabrics.inventory[0]}, ${bHFabrics.inventory[1]}, ${bHFabrics.inventory[2]}, and ${bHFabrics.inventory[3]}. Turns out it wasn't this store.`,
+  `You look around at the inventory: ${spandexWorld.inventory[0]}, ${spandexWorld.inventory[1]}, ${spandexWorld.inventory[2]}, and ${spandexWorld.inventory[3]}. You found the fabric! Time to head back to the studio.`
 ]
 
 const userOptions = [
   ['I am ready to work'],
   ['go to the fabric store', 'pick up the dry cleaning'],
-  ['Go back to the studio', 'Go to the fabric store'],
-  ['Mood Fabrics', 'B&H Fabircs', 'Spandex World'],
-  ['Go back to the studio', 'Go to B&H Fabrics', 'Go to Spandex World'],
-  ['Go back to the studio', 'Go to Mood Fabrics', 'Go to Spandex World'],
+  ['Go back to the studio', 'Go to the fabric store'], //use this option for narrationTexts[15]
+  ['Mood Fabrics', 'B&H Fabircs', 'Spandex World'], //use this for narrationTexts[16]
+  ['Go back to the studio', 'Go to B&H Fabrics', 'Go to Spandex World'], //use this for narrationTexts[17]
+  ['Go back to the studio', 'Go to Mood Fabrics', 'Go to Spandex World'], //use this for narrationTexts[18]
   ['Go back to the studio', 'Pick up the dry cleaning'],
-  ['Go back to the studio']
+  ['Go back to the studio'], //use this for narrationTexts[19]
+  ['Drop off garments', 'Buy the fabric'],
+  ['Essex station', 'East Broadway station'],
+  ['Start day 2']
 ]
 
 //--FUNCTIONS--
@@ -169,7 +178,7 @@ function thirdDecision() {
 
 //head back to the studio after picking up dry cleaning
 function deadEnd1() {
-  if (userChoices === 3) {
+  if (userChoices >= 3) {
     let previousButtons = document.querySelectorAll('button')
     buttonRemoval(previousButtons, 0, 1, null)
     narrationText.innerText = narrationTexts[4]
@@ -255,6 +264,46 @@ function dryCleaningSecond() {
 function endOfDay() {
   let previousButtons = document.querySelector('button')
   buttonRemoval(previousButtons, 0, null, null)
-  narrationText.innerText = 'Congratulations, you win! Christina was so impressed by your hard work that she has made you the head dresser for the fashion show!'
+  narrationText.innerText = narrationTexts[11]
+  optionButtons(10, 0, null, null, startingDay2, null, null)
+}
+
+//starting day 2
+function startingDay2() {
+  let previousButtons = document.querySelector('button')
+  buttonRemoval(previousButtons, 0, null, null)
+  narrationText.innerText = narrationTexts[12]
+  optionButtons(8, 0, 1, null, clientDropOff, buyYardageFirst)
+}
+
+function clientDropOff() {
+  let previousButtons = document.querySelectorAll('button')
+  buttonRemoval(previousButtons, 0, 1, null)
+  narrationText.innerText = narrationTexts[13]
+  optionButtons(9, 0, 1, null, essexStation, eastBroadway)
+}
+
+function buyYardageFirst() {
+  let previousButtons = document.querySelectorAll('button')
+  buttonRemoval(previousButtons, 0, 1, null)
+  narrationText.innerText = narrationTexts[3]
   restart()
+}
+
+function essexStation() {
+  let previousButtons = document.querySelectorAll('button')
+  buttonRemoval(previousButtons, 0, 1, null)
+  narrationText.innerText = narrationTexts[14]
+  restart()
+}
+
+function eastBroadway() {
+  let previousButtons = document.querySelectorAll('button')
+  buttonRemoval(previousButtons, 0, 1, null)
+  narrationText.innerText = narrationTexts[15]
+  optionButtons(2, 0, 1, null, deadEnd1, buyYardageSecond)
+}
+
+function buyYardageSecond() {
+  console.log('hello');
 }
